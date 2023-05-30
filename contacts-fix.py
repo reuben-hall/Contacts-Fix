@@ -3,9 +3,11 @@ import re
 
 filename = '/Users/reuben/Development/Python/Contacts Fix/contacts-2.csv'
 
-match_all_numbers = "[\(?\+\)?^0-9]"
-is_us_number = "^\(?\d{3}\)? ?\d{3} ?\d{4}\s"
-chars = "()- "
+# match_all_numbers = "[\(?\+\)?^0-9]"
+is_us_number = "^[1-9]{10}"
+is_uk_number = "07\d{9}"
+is_ph_number = "09\d{9}"
+# chars = "()- "
 
 
 with open(filename, 'r') as csvfile:
@@ -21,26 +23,24 @@ with open(filename, 'r') as csvfile:
             match test_char[0]:
                 case "+":
                     # International number
-                    print(test_char.replace('-','').replace(' ',''))
+                    pass
+                    # print(test_char.replace('-','').replace(' ',''))
                 case "(":
                     # Local US Number
-                    print(test_char.replace('(','').replace(')','').replace(' ','').replace('-',''))
+                    pass
+                    # print(test_char.replace('(','').replace(')','').replace(' ','').replace('-',''))
                 case _:
-                    print(f'{test_char} did not match any criteria.')
+                    test_char = test_char.replace('(','').replace(')','').replace(' ','').replace('-','')
+                    # print(test_char)
+                    if re.match(is_us_number, test_char):
+                        print(f'{test_char} is probably US number.')
+                    elif re.match(is_uk_number, test_char):
+                        print(f'{test_char} is probably a UK number.')
+                    elif re.match(is_ph_number, test_char):
+                        print(f'{test_char} is probably a PH number.')
             
             
-
-
-        """ if (test_char):
-            if (test_char[0] == "+"):
-                print(f'Skipping {test_char}: starts with +.')
-
-            elif " " in test_char:
-                print(test_char.replace(" ",""))
-        
-        else:
-            print(f'-' * 75) """
-        
-        line_count += 1
+            
+        # line_count += 1
         
     print(f'Processed {line_count} lines.')
