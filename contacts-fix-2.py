@@ -1,3 +1,6 @@
+# Version 0.2
+# Implementation using function for number checking
+
 import csv
 import re
 
