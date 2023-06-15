@@ -23,18 +23,23 @@ def numbercheck(mobile_number):
         
         # Run US number regex pattern
         if re.match(is_us_number, phone_number):
-            print(f'{phone_number} is probably US number.')
+            #print(f'{phone_number} is probably US number.')
             # Append US country code to left of string and print result
             full_phone_number = "+1" + phone_number
-            print(f'Updated phone number is {full_phone_number}.')
+            #print(f'Updated phone number is {full_phone_number}.')
+            return full_phone_number
+        
         elif re.match(is_uk_mobile_number, phone_number):
-            print(f'{phone_number} is probably UK mobile number.')
+            #print(f'{phone_number} is probably UK mobile number.')
             full_phone_number = "+44" + phone_number[1:]
-            print(f'Updated phone number is {full_phone_number}.')
+            #print(f'Updated phone number is {full_phone_number}.')
+            return full_phone_number
+        
         elif re.match(is_ph_number, phone_number):
-            print(f'{phone_number} is probably PH number.')
+            #print(f'{phone_number} is probably PH number.')
             full_phone_number = "+63" + phone_number[1:]
-            print(f'Updated phone number is {full_phone_number}.')
+            #print(f'Updated phone number is {full_phone_number}.')
+            return full_phone_number
         else:
             return "Number not valid"
     
@@ -44,7 +49,7 @@ with open(filename, 'r') as csvfile:
     line_count = 0
 
     for row in contactsreader:
-        numbercheck(row["Mobile Phone"])
+        print(numbercheck(row["Mobile Phone"]))
         line_count += 1
     
     print(line_count)
