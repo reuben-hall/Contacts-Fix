@@ -41,7 +41,9 @@ def numbercheck(mobile_number):
             #print(f'Updated phone number is {full_phone_number}.')
             return full_phone_number
         else:
-            return "Number not valid"
+            return False
+    else:
+        pass
     
 with open(filename, 'r') as csvfile:
     contactsreader = csv.DictReader(csvfile)
